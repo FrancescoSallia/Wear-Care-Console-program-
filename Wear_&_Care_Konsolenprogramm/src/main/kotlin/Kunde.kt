@@ -49,6 +49,7 @@ class Kunde(
         println("Deine persönlichen Daten: 10")
         println("Alle Artikeln nach Preisen Sortiert: Geben Sie 11 ein")
         println("Ausloggen: 12")
+        println("Account Löschen: 13")
         try {
 
 
@@ -71,9 +72,12 @@ class Kunde(
                 println("Sie haben sich erfolgreich Ausgeloggt!")
                 store.startMenu()
             }
+            13 -> {
+                kontoLöschen(store)
+            }
             else -> kundenMenu(Store())
         }
-    }catch (e: Exception) {
+    } catch (e: Exception) {
         println()
         println("Du hast eine falsche Eingabe gemacht! Du wirst zurück zur Übersicht weitergeleitet!")
             println()
@@ -98,7 +102,7 @@ class Kunde(
         }
         println("-----------------PFLEGE-PRODUKTE-------------------")
         for (i in store.pflegeProdukteImStore) {
-            println("${j + 1} Pflege-Produkt Name: ${store.pflegeProdukteImStore[n].name} \n Preis: ${store.pflegeProdukteImStore[n].preis}€ \n (${store.pflegeProdukteImStore[n].größe}) ml \n Farbe: ${store.pflegeProdukteImStore[n].farbe} Ölfrei: ${if (store.pflegeProdukteImStore[n].ölfrei) "Ja" else "Nein"} \n")
+            println("${j + 1} Pflege-Produkt Name: ${store.pflegeProdukteImStore[n].name} \n Preis: ${store.pflegeProdukteImStore[n].preis}€ \n (${store.pflegeProdukteImStore[n].größe}) ml \n Farbe: ${store.pflegeProdukteImStore[n].farbe} \n Ölfrei: ${if (store.pflegeProdukteImStore[n].ölfrei) "Ja" else "Nein"} \n")
             n++
             j++
         }
@@ -356,7 +360,25 @@ class Kunde(
         kundenMenu(store)
     }
 
+    //Konto-lösch funtkion
+    fun kontoLöschen(store: Store) {
+        val eingeloggterAccount = store.eingelogterAccount
 
+        println()
+        println("Willst du dein Account löschen?")
+        val eingabe = readln().lowercase()
+        if (eingabe == "ja" || eingabe == "j"){
+            store.accountListe.remove(eingeloggterAccount)
+            println()
+            println("Account erfolgreich gelöscht ✅")
+            println()
+            store.startMenu()
+            println()
+        } else {
+            kundenMenu(store)
+            println()
+        }
+    }
 }
 
 

@@ -69,7 +69,7 @@ open class Store() {
             println("Vielen Dank, bis zum nächsten mal! 👋 ")
             exitProcess(0)  //Um das projekt zu beenden!
         }
-    }catch (e:Exception){
+    } catch (e:Exception){
         println()
          println("Du hast eine falsche Eingabe gemacht! Versuch es erneut.")
          println()
@@ -283,7 +283,7 @@ open class Store() {
 
         var j = 0
         for (i in store.pflegeProdukteImStore) {
-            println("${j +1} Pflege-Produkt Name: ${store.pflegeProdukteImStore[j].name} \nPreis: ${store.pflegeProdukteImStore[j].preis}€ \n (${store.pflegeProdukteImStore[j].größe}) ml \nFarbe: ${store.pflegeProdukteImStore[j].farbe} Ölfrei: ${if (store.pflegeProdukteImStore[j].ölfrei) "Ja" else "Nein"}  \n")
+            println("${j +1} Pflege-Produkt Name: ${store.pflegeProdukteImStore[j].name} \nPreis: ${store.pflegeProdukteImStore[j].preis}€ \n (${store.pflegeProdukteImStore[j].größe}) ml \nFarbe: ${store.pflegeProdukteImStore[j].farbe} \nÖlfrei: ${if (store.pflegeProdukteImStore[j].ölfrei) "Ja" else "Nein"}  \n")
             j++
         }
 
@@ -380,7 +380,7 @@ open class Store() {
     }
 
     var warenkorbListe: MutableList<ModeProdukte> = mutableListOf()
-    var alteBestellungenListe: MutableList<Bestellung> = mutableListOf()
+    //var alteBestellungenListe: MutableList<Bestellung> = mutableListOf()
 
 
 

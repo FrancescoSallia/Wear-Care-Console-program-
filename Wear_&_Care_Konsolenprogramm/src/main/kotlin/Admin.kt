@@ -4,8 +4,6 @@ class Admin(
     var adminPassword: String
 ) : Account(name, pin) {
 
-    var eingelogterAdmin: Account? = null
-
     fun adminLogin(store: Store) {
 
         var nameAdmin: String = ""
@@ -24,9 +22,6 @@ class Admin(
             println("Du sollst ganze Zahlen eingeben!, versuchs nochmal")
             adminLogin(store)
         }
-        var adminGefunden =
-            store.accountListe.find { it.name == nameAdmin && it.pin == pinAdmin && this.adminPassword == passwortAdmin }
-        eingelogterAdmin = adminGefunden
 
         if (nameAdmin == name && pinAdmin == pin && passwortAdmin == adminPassword) {
             println("Willkommen zurück $name")
@@ -225,13 +220,17 @@ fun produktEntfernenTshirt(store: Store) {
         println("${j + 1} Tshirt Marke: ${store.tshirtsImStore[j].name} \n Preis: ${store.tshirtsImStore[j].preis}€ \n Größe: ${store.tshirtsImStore[j].größe} \n Farbe: ${store.tshirtsImStore[j].farbe} \n Ärmel: ${store.tshirtsImStore[j].ärmel} \n")
         j++
     }
-    println()
-    println("Welchen Artikel möchtest du entfernen?")
-    var input = readln().toInt()
-    println()
-    store.tshirtsImStore.removeAt(input - 1)
-    println("Artikel erfolgreich entfernt")
-    println()
+    try {
+        println()
+        println("Welchen Artikel möchtest du entfernen?")
+        var input = readln().toInt()
+        println()
+        store.tshirtsImStore.removeAt(input - 1)
+        println("Artikel erfolgreich entfernt")
+        println()
+    } catch (e: Exception) {
+        adminMenu(store)
+    }
 
     println("Möchtest du noch ein Artikel Entfernen?")
     var input2 = readln()
@@ -251,15 +250,18 @@ fun produktEntfernenSchuhe(store: Store) {
         println("${j + 1} Schuh-Marke: ${store.schuheImStore[j].name} \n Preis: ${store.schuheImStore[j].preis}€ \n Größe: ${store.schuheImStore[j].größe}\n Farbe: ${store.schuheImStore[j].farbe} \n")
         j++
     }
-    println()
-    println("Welchen Artikel möchtest du entfernen?")
-    var input = readln().toInt()
+    try {
+        println()
+        println("Welchen Artikel möchtest du entfernen?")
+        var input = readln().toInt()
 
-    println()
-    store.schuheImStore.removeAt(input - 1)
-    println("Artikel erfolgreich entfernt")
-    println()
-
+        println()
+        store.schuheImStore.removeAt(input - 1)
+        println("Artikel erfolgreich entfernt")
+        println()
+    } catch (e: Exception) {
+        adminMenu(store)
+    }
     println("Möchtest du noch ein Artikel Entfernen?")
     var input2 = readln()
 
@@ -281,13 +283,24 @@ fun produktEntfernenPflege(store: Store) {
         j++
     }
     println()
-    println("Welchen Artikel möchtest du entfernen?")
-    var input = readln().toInt()
 
-    println()
-    store.pflegeProdukteImStore.removeAt(input - 1)
-    println("Artikel erfolgreich entfernt")
-    println()
+    try {
+        println("Welchen Artikel möchtest du entfernen?")
+        var input = readln().toInt()
+        println()
+        store.pflegeProdukteImStore.removeAt(input - 1)
+        println("Artikel erfolgreich entfernt")
+        println()
+    } catch (e: Exception){
+        adminMenu(store)
+    }
+    //println("Welchen Artikel möchtest du entfernen?")
+   // var input = readln().toInt()
+
+   // println()
+   // store.pflegeProdukteImStore.removeAt(input - 1)
+   // println("Artikel erfolgreich entfernt")
+    //println()
 
     println("Möchtest du noch ein Artikel Entfernen?")
     var input2 = readln()
@@ -300,14 +313,4 @@ fun produktEntfernenPflege(store: Store) {
         adminMenu(store)
     }
 }
-
-
-
-
-
-
-
-
-
-
 
